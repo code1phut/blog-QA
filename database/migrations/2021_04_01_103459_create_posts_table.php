@@ -21,7 +21,7 @@ class CreatePostsTable extends Migration
             $table->string('slug')->default(100);
             $table->string('feature_image');
             $table->string('description')->default(160);
-            $table->integer('views');
+            $table->integer('views')->default(0);
             $table->string('post_excerpt')->default(400);
             $table->timestamps();
         });

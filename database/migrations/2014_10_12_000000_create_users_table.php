@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\UserRoles;
+use App\Enums\UserStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,12 +19,14 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('user_name');
             $table->string('full_name');
+            $table->string('avatar')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('user_type');
-            $table->string('is_activated');
-            $table->string('social_type');
+            $table->string('role')->default(UserRoles::USER);
+            $table->string('status')->default(UserStatus::ACTIVE);
+            $table->string('social_type')->nullable();
+            $table->softDeletes('banned_at');
             $table->rememberToken();
             $table->timestamps();
         });
