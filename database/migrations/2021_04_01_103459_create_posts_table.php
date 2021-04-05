@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('title')->default(60);
-            $table->text('content')->default(3000);
+            $table->text('content')->text(3000);
             $table->string('slug')->default(100);
             $table->string('feature_image');
             $table->string('description')->default(160);
