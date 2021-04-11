@@ -39,6 +39,18 @@ RUN docker-php-ext-enable xdebug
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN composer global require "squizlabs/php_codesniffer=*"
 
+# install nodejs
+# Install Node.js
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash
+RUN apt-get install --yes nodejs
+RUN node -v
+RUN npm -v
+RUN npm i -g nodemon
+RUN nodemon -v
+
+# Cleanup
+RUN apt-get update && apt-get upgrade -y && apt-get autoremove -y
+
 # Add user for laravel application
 RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
