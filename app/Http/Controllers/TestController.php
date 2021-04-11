@@ -12,4 +12,9 @@ class TestController extends Controller
             'msg' => 'This is home page',
         ]);
     }
+
+    public function test(): string
+    {
+        return "it's working";
+    }
 }
