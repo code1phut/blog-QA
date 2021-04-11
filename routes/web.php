@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::post('/app/create_tag', 'App\Http\Controllers\Admin\TagController@addTags');
+Route::get('/app/get_tags', 'App\Http\Controllers\Admin\TagController@getTags');
+
+
 Route::get('/new', 'App\Http\Controllers\TestController@index');
 
 Route::any('{slug}', function () {
