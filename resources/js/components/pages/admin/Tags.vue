@@ -13,7 +13,7 @@
                         <thead>
                         <tr>
                             <th scope="row">#</th>
-                            <th>Name</th>
+                            <th style="width: 150px">Name</th>
                             <th>Create_At</th>
                             <th>Updated_At</th>
                             <th style="width: 250px">Action</th>
@@ -71,31 +71,22 @@ export default {
         this.tags = await this.getTags();
     },
 
-     mounted() {
-        if (!this.tags) {
-            this.tags();
-        }
-    },
-
     methods: {
 
         async addTag() {
             if (this.data.name.trim() == '') return this.error('Tag Name is required!');
-            const response = await this.callApi('post', '/app/create_tag', this.data);
-
-            if (response.status === 200) {
-                this.tags.unshift(response.data);
-                this.success('Tag has been added successfully!');
-                this.addModal = false;
-                this.data.name = "";
-            } else {
+                await this.callApi('post', '/app/create_tag', this.data).then((response) => {
+                    this.success('Tag has been added successfully!');
+                    this.tags.unshift(response.data);
+                    this.addModal = false;
+                    this.data.name = "";
+            }).catch((e) => {
                 this.error();
-            }
+            });
         },
 
         async getTags() {
           const response = await this.callApi('get', '/app/get_tags');
-            console.log('response', response.data);
           return response.data;
         },
     }

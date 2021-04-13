@@ -3,25 +3,42 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Tag;
+use App\Repositories\Interfaces\IApiTagRepository as ApiTagRepository;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class TagController extends Controller
 {
-    public function getTags()
+    protected $tagRepository;
+
+    public function __construct(ApiTagRepository $tagRepository)
     {
-        return Tag::query()->orderBy('id', 'desc')->get();
+        $this->tagRepository = $tagRepository;
     }
 
-    public function addTags(Request $request): \Illuminate\Http\JsonResponse
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function index(Request $request)
     {
-        $tag = Tag::create([
-           'name' => $request->get('name'),
+        $data = $this->tagRepository->all();
+
+        return response()->json($data);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function store(Request $request): JsonResponse
+    {
+        $input = $request->only([
+            'name'
         ]);
 
-        return response()->json([
-            'data' => $tag
-        ], Response::HTTP_OK);
+        $data = $this->tagRepository->create($input);
+
+        return response()->json($data);
     }
 }
