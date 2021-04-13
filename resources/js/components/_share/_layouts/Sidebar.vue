@@ -1,6 +1,5 @@
 <template>
-    <div>
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <router-link
@@ -103,5 +102,4 @@
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
         </ul>
-    </div>
 </template>
