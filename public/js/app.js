@@ -2007,17 +2007,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, _callee);
     }))();
   },
-  mounted: function mounted() {
-    if (!this.tags) {
-      this.tags();
-    }
-  },
   methods: {
     addTag: function addTag() {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -2031,23 +2025,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 _context2.next = 4;
-                return _this2.callApi('post', '/app/create_tag', _this2.data);
-
-              case 4:
-                response = _context2.sent;
-
-                if (response.status === 200) {
-                  _this2.tags.unshift(response.data);
-
+                return _this2.callApi('post', '/app/create_tag', _this2.data).then(function (response) {
                   _this2.success('Tag has been added successfully!');
+
+                  _this2.tags.unshift(response.data);
 
                   _this2.addModal = false;
                   _this2.data.name = "";
-                } else {
+                })["catch"](function (e) {
                   _this2.error();
-                }
+                });
 
-              case 6:
+              case 4:
               case "end":
                 return _context2.stop();
             }
@@ -2069,10 +2058,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context3.sent;
-                console.log('response', response.data);
                 return _context3.abrupt("return", response.data);
 
-              case 5:
+              case 4:
               case "end":
                 return _context3.stop();
             }
@@ -70531,7 +70519,7 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", { attrs: { scope: "row" } }, [_vm._v("#")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Name")]),
+        _c("th", { staticStyle: { width: "150px" } }, [_vm._v("Name")]),
         _vm._v(" "),
         _c("th", [_vm._v("Create_At")]),
         _vm._v(" "),

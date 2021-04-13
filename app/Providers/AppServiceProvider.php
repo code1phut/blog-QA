@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
+    protected $repositories = [
+        'ApiTagRepository',
+    ];
     /**
      * Register any application services.
      *
@@ -14,7 +17,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->registerRepositories();
+    }
+
+    private function registerRepositories() {
+        foreach ($this->repositories as $repository) {
+            $this->app->bindIf(
+                'App\\Repositories\\Interfaces\\I'.$repository,
+                'App\\Repositories\\Eloquents\\'.$repository
+            );
+        }
     }
 
     /**
