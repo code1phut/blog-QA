@@ -1,12 +1,18 @@
 <template>
     <div>
-        <main>
+        <main id="page-top">
             <!-- Page Wrapper -->
             <div id="wrapper">
 
+                <!-- Scroll to Top Button-->
+                <a class="scroll-to-top rounded" href="#page-top">
+                    <i class="fas fa-angle-up"></i>
+                </a>
                 <!-- Sidebar -->
                 <Sidebar />
                 <!-- End of Sidebar -->
+
+
 
                 <!-- Content Wrapper -->
                 <div id="content-wrapper" class="d-flex flex-column">
