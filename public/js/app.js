@@ -2208,17 +2208,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var _components_MainApp_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/MainApp.vue */ "./resources/js/components/MainApp.vue");
 /* harmony import */ var bootstrap_dist_css_bootstrap_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap/dist/css/bootstrap.css */ "./node_modules/bootstrap/dist/css/bootstrap.css");
 /* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
 /* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./common */ "./resources/js/common.js");
-Object(function webpackMissingModule() { var e = new Error("Cannot find module './store/store.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-/* harmony import */ var view_design__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! view-design */ "./node_modules/view-design/dist/iview.js");
-/* harmony import */ var view_design__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(view_design__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var view_design_dist_styles_iview_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! view-design/dist/styles/iview.css */ "./node_modules/view-design/dist/styles/iview.css");
+/* harmony import */ var view_design__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! view-design */ "./node_modules/view-design/dist/iview.js");
+/* harmony import */ var view_design__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(view_design__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var view_design_dist_styles_iview_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! view-design/dist/styles/iview.css */ "./node_modules/view-design/dist/styles/iview.css");
 
 
 
@@ -2227,13 +2226,11 @@ Object(function webpackMissingModule() { var e = new Error("Cannot find module '
 
 
 
-
-vue__WEBPACK_IMPORTED_MODULE_8__.default.mixin(_common__WEBPACK_IMPORTED_MODULE_4__.default);
-vue__WEBPACK_IMPORTED_MODULE_8__.default.use((view_design__WEBPACK_IMPORTED_MODULE_6___default()));
-var app = new vue__WEBPACK_IMPORTED_MODULE_8__.default({
+vue__WEBPACK_IMPORTED_MODULE_7__.default.mixin(_common__WEBPACK_IMPORTED_MODULE_4__.default);
+vue__WEBPACK_IMPORTED_MODULE_7__.default.use((view_design__WEBPACK_IMPORTED_MODULE_5___default()));
+var app = new vue__WEBPACK_IMPORTED_MODULE_7__.default({
   el: '#app',
   router: _router__WEBPACK_IMPORTED_MODULE_3__.default,
-  store: Object(function webpackMissingModule() { var e = new Error("Cannot find module './store/store.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()),
   render: function render(h) {
     return h(_components_MainApp_vue__WEBPACK_IMPORTED_MODULE_0__.default);
   }
