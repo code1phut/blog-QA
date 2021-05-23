@@ -1888,6 +1888,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -1974,15 +1980,60 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       data: {
         name: ""
       },
+      editData: {
+        id: "",
+        name: ""
+      },
       tags: {},
+      deleteItem: {},
       addModal: false,
-      isAdding: false
+      editModal: false,
+      isAdding: false,
+      isDeleting: false,
+      showModalDelete: false,
+      index: -1
     };
   },
   created: function created() {
@@ -2008,33 +2059,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   methods: {
-    addTag: function addTag() {
+    getTags: function getTags() {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                if (!(_this2.data.name.trim() == '')) {
-                  _context2.next = 2;
-                  break;
-                }
-
-                return _context2.abrupt("return", _this2.error('Tag Name is required!'));
+                _context2.next = 2;
+                return _this2.callApi('get', '/app/get_tags');
 
               case 2:
-                _context2.next = 4;
-                return _this2.callApi('post', '/app/create_tag', _this2.data).then(function (response) {
-                  _this2.success('Tag has been added successfully!');
-
-                  _this2.tags.unshift(response.data);
-
-                  _this2.addModal = false;
-                  _this2.data.name = "";
-                })["catch"](function (e) {
-                  _this2.error();
-                });
+                response = _context2.sent;
+                return _context2.abrupt("return", response.data);
 
               case 4:
               case "end":
@@ -2044,21 +2083,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    getTags: function getTags() {
+    addTag: function addTag() {
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                _context3.next = 2;
-                return _this3.callApi('get', '/app/get_tags');
+                if (!(_this3.data.name.trim() == '')) {
+                  _context3.next = 2;
+                  break;
+                }
+
+                return _context3.abrupt("return", _this3.error('The tag name field is required.'));
 
               case 2:
-                response = _context3.sent;
-                return _context3.abrupt("return", response.data);
+                _context3.next = 4;
+                return _this3.callApi('post', '/app/create_tag', _this3.data).then(function (response) {
+                  _this3.success('Tag has been added successfully!');
+
+                  _this3.tags.unshift(response.data);
+
+                  _this3.addModal = false;
+                  _this3.data.name = "";
+                })["catch"](function (e) {
+                  _this3.error();
+                });
 
               case 4:
               case "end":
@@ -2067,6 +2118,82 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee3);
       }))();
+    },
+    updateTag: function updateTag(editData) {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                if (!(_this4.editData.name.trim() == '')) {
+                  _context4.next = 2;
+                  break;
+                }
+
+                return _context4.abrupt("return", _this4.error('The tag name field is required.'));
+
+              case 2:
+                _context4.next = 4;
+                return _this4.callApi('post', "/app/update_tag/".concat(editData.id), _this4.editData).then(function (response) {
+                  _this4.tags[_this4.index].name = _this4.editData.name;
+
+                  _this4.success('Tag has been update successfully!');
+
+                  _this4.editModal = false;
+                })["catch"](function (e) {
+                  _this4.error();
+                });
+
+              case 4:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }))();
+    },
+    deleteTag: function deleteTag() {
+      var _this5 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.next = 2;
+                return _this5.callApi('post', "api/admin/app/delete_tag/".concat(_this5.deleteItem)).then(function (res) {
+                  _this5.success('Tag has been delete successfully!');
+
+                  _this5.tags.splice(_this5.index, 1);
+
+                  _this5.showModalDelete = false;
+                })["catch"](function (e) {
+                  _this5.error();
+                });
+
+              case 2:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5);
+      }))();
+    },
+    showEditTag: function showEditTag(tag, index) {
+      var obj = {
+        id: tag.id,
+        name: tag.name
+      };
+      this.editData = obj;
+      this.editModal = true;
+      this.index = index;
+    },
+    showDeletingModal: function showDeletingModal(tag, idx) {
+      this.showModalDelete = true;
+      this.deleteItem = tag;
+      this.index = idx;
     }
   }
 });
@@ -68106,11 +68233,13 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("main", [
+    _c("main", { attrs: { id: "page-top" } }, [
       _c(
         "div",
         { attrs: { id: "wrapper" } },
         [
+          _vm._m(0),
+          _vm._v(" "),
           _c("Sidebar"),
           _vm._v(" "),
           _c(
@@ -68128,7 +68257,18 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      { staticClass: "scroll-to-top rounded", attrs: { href: "#page-top" } },
+      [_c("i", { staticClass: "fas fa-angle-up" })]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -68158,12 +68298,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("footer", { staticClass: "sticky-footer bg-white" }, [
-        _c("div", { staticClass: "container my-auto" }, [
-          _c("div", { staticClass: "copyright text-center my-auto" }, [
-            _c("span", [_vm._v("Copyright © Your Website 2020")])
-          ])
+    return _c("footer", { staticClass: "sticky-footer bg-white" }, [
+      _c("div", { staticClass: "container my-auto" }, [
+        _c("div", { staticClass: "copyright text-center my-auto" }, [
+          _c("span", [_vm._v("Copyright © Your Website 2021")])
         ])
       ])
     ])
@@ -68191,195 +68329,193 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "ul",
-      {
-        staticClass:
-          "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion",
-        attrs: { id: "accordionSidebar" }
-      },
-      [
-        _c(
-          "router-link",
-          {
-            staticClass:
-              "sidebar-brand d-flex align-items-center justify-content-center",
-            attrs: { to: "/", exact: "" }
-          },
-          [
-            _c("div", { staticClass: "sidebar-brand-icon rotate-n-15" }, [
-              _c("i", { staticClass: "fas fa-laugh-wink" })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "sidebar-brand-text mx-3" }, [
-              _vm._v(" Blog "),
-              _c("sup", [_vm._v("QA")])
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c("hr", { staticClass: "sidebar-divider my-0" }),
-        _vm._v(" "),
-        _c(
-          "li",
-          { staticClass: "nav-item active" },
-          [
-            _c(
-              "router-link",
-              { staticClass: "nav-link", attrs: { to: "/", exact: "" } },
-              [
-                _c("i", { staticClass: "fas fa-fw fa-tachometer-alt" }),
-                _vm._v(" "),
-                _c("span", [_vm._v("Dashboard")])
-              ]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c("hr", { staticClass: "sidebar-divider" }),
-        _vm._v(" "),
-        _c(
-          "li",
-          { staticClass: "nav-item" },
-          [
-            _c(
-              "router-link",
-              {
-                staticClass: "nav-link collapsed",
-                attrs: {
-                  to: "/categories",
-                  exact: "",
-                  "data-toggle": "collapse",
-                  "data-target": "#collapseTwo",
-                  "aria-expanded": "true",
-                  "aria-controls": "collapseTwo"
-                }
-              },
-              [
-                _c("i", {
-                  staticClass: "fa fa-archive",
-                  attrs: { "aria-hidden": "true" }
-                }),
-                _vm._v(" "),
-                _c("span", [_vm._v("Category")])
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", {
-              staticClass: "collapse",
+  return _c(
+    "ul",
+    {
+      staticClass:
+        "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion",
+      attrs: { id: "accordionSidebar" }
+    },
+    [
+      _c(
+        "router-link",
+        {
+          staticClass:
+            "sidebar-brand d-flex align-items-center justify-content-center",
+          attrs: { to: "/", exact: "" }
+        },
+        [
+          _c("div", { staticClass: "sidebar-brand-icon rotate-n-15" }, [
+            _c("i", { staticClass: "fas fa-laugh-wink" })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "sidebar-brand-text mx-3" }, [
+            _vm._v(" Blog "),
+            _c("sup", [_vm._v("QA")])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("hr", { staticClass: "sidebar-divider my-0" }),
+      _vm._v(" "),
+      _c(
+        "li",
+        { staticClass: "nav-item active" },
+        [
+          _c(
+            "router-link",
+            { staticClass: "nav-link", attrs: { to: "/", exact: "" } },
+            [
+              _c("i", { staticClass: "fas fa-fw fa-tachometer-alt" }),
+              _vm._v(" "),
+              _c("span", [_vm._v("Dashboard")])
+            ]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("hr", { staticClass: "sidebar-divider" }),
+      _vm._v(" "),
+      _c(
+        "li",
+        { staticClass: "nav-item" },
+        [
+          _c(
+            "router-link",
+            {
+              staticClass: "nav-link collapsed",
               attrs: {
-                id: "collapseTwo",
-                "aria-labelledby": "headingTwo",
-                "data-parent": "#accordionSidebar"
+                to: "/categories",
+                exact: "",
+                "data-toggle": "collapse",
+                "data-target": "#collapseTwo",
+                "aria-expanded": "true",
+                "aria-controls": "collapseTwo"
               }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c("hr", { staticClass: "sidebar-divider" }),
-        _vm._v(" "),
-        _c(
-          "li",
-          { staticClass: "nav-item" },
-          [
-            _c(
-              "router-link",
-              {
-                staticClass: "nav-link collapsed",
-                attrs: {
-                  to: "/posts",
-                  "data-toggle": "collapse",
-                  "data-target": "#collapseUtilities",
-                  "aria-expanded": "true",
-                  "aria-controls": "collapseUtilities"
-                }
-              },
-              [
-                _c("i", {
-                  staticClass: "fa fa-book",
-                  attrs: { "aria-hidden": "true" }
-                }),
-                _vm._v(" "),
-                _c("span", [_vm._v("Posts")])
-              ]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c("hr", { staticClass: "sidebar-divider" }),
-        _vm._v(" "),
-        _c(
-          "li",
-          { staticClass: "nav-item" },
-          [
-            _c(
-              "router-link",
-              {
-                staticClass: "nav-link collapsed",
-                attrs: {
-                  to: "/tags",
-                  "data-toggle": "collapse",
-                  "data-target": "#collapseUtilities",
-                  "aria-expanded": "true",
-                  "aria-controls": "collapseUtilities"
-                }
-              },
-              [
-                _c("i", {
-                  staticClass: "fa fa-tags",
-                  attrs: { "aria-hidden": "true" }
-                }),
-                _vm._v(" "),
-                _c("span", [_vm._v("Tags")])
-              ]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c("hr", { staticClass: "sidebar-divider" }),
-        _vm._v(" "),
-        _c(
-          "li",
-          { staticClass: "nav-item" },
-          [
-            _c(
-              "router-link",
-              {
-                staticClass: "nav-link collapsed",
-                attrs: {
-                  to: "/users",
-                  href: "#",
-                  "data-toggle": "collapse",
-                  "data-target": "#collapsePages",
-                  "aria-expanded": "true",
-                  "aria-controls": "collapsePages"
-                }
-              },
-              [
-                _c("i", {
-                  staticClass: "fa fa-users",
-                  attrs: { "aria-hidden": "true" }
-                }),
-                _vm._v(" "),
-                _c("span", [_vm._v("Users")])
-              ]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c("hr", { staticClass: "sidebar-divider d-none d-md-block" }),
-        _vm._v(" "),
-        _vm._m(0)
-      ],
-      1
-    )
-  ])
+            },
+            [
+              _c("i", {
+                staticClass: "fa fa-archive",
+                attrs: { "aria-hidden": "true" }
+              }),
+              _vm._v(" "),
+              _c("span", [_vm._v("Category")])
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", {
+            staticClass: "collapse",
+            attrs: {
+              id: "collapseTwo",
+              "aria-labelledby": "headingTwo",
+              "data-parent": "#accordionSidebar"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("hr", { staticClass: "sidebar-divider" }),
+      _vm._v(" "),
+      _c(
+        "li",
+        { staticClass: "nav-item" },
+        [
+          _c(
+            "router-link",
+            {
+              staticClass: "nav-link collapsed",
+              attrs: {
+                to: "/posts",
+                "data-toggle": "collapse",
+                "data-target": "#collapseUtilities",
+                "aria-expanded": "true",
+                "aria-controls": "collapseUtilities"
+              }
+            },
+            [
+              _c("i", {
+                staticClass: "fa fa-book",
+                attrs: { "aria-hidden": "true" }
+              }),
+              _vm._v(" "),
+              _c("span", [_vm._v("Posts")])
+            ]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("hr", { staticClass: "sidebar-divider" }),
+      _vm._v(" "),
+      _c(
+        "li",
+        { staticClass: "nav-item" },
+        [
+          _c(
+            "router-link",
+            {
+              staticClass: "nav-link collapsed",
+              attrs: {
+                to: "/tags",
+                "data-toggle": "collapse",
+                "data-target": "#collapseUtilities",
+                "aria-expanded": "true",
+                "aria-controls": "collapseUtilities"
+              }
+            },
+            [
+              _c("i", {
+                staticClass: "fa fa-tags",
+                attrs: { "aria-hidden": "true" }
+              }),
+              _vm._v(" "),
+              _c("span", [_vm._v("Tags")])
+            ]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("hr", { staticClass: "sidebar-divider" }),
+      _vm._v(" "),
+      _c(
+        "li",
+        { staticClass: "nav-item" },
+        [
+          _c(
+            "router-link",
+            {
+              staticClass: "nav-link collapsed",
+              attrs: {
+                to: "/users",
+                href: "#",
+                "data-toggle": "collapse",
+                "data-target": "#collapsePages",
+                "aria-expanded": "true",
+                "aria-controls": "collapsePages"
+              }
+            },
+            [
+              _c("i", {
+                staticClass: "fa fa-users",
+                attrs: { "aria-hidden": "true" }
+              }),
+              _vm._v(" "),
+              _c("span", [_vm._v("Users")])
+            ]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("hr", { staticClass: "sidebar-divider d-none d-md-block" }),
+      _vm._v(" "),
+      _vm._m(0)
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -70365,21 +70501,44 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
+          {
+            staticStyle: {
+              display: "flex",
+              "flex-direction": "row-reverse",
+              "margin-top": "5px"
+            }
+          },
           [
             _c(
-              "Button",
-              {
-                attrs: { type: "success" },
-                on: {
-                  click: function($event) {
-                    _vm.addModal = true
-                  }
-                }
-              },
-              [_vm._v("Add Tag")]
+              "div",
+              [
+                _c(
+                  "Button",
+                  {
+                    attrs: { type: "success" },
+                    on: {
+                      click: function($event) {
+                        _vm.addModal = true
+                      }
+                    }
+                  },
+                  [_vm._v("Add Tag")]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              [
+                _c("Input", {
+                  staticStyle: { width: "300px", "margin-right": "10px" },
+                  attrs: { search: "", placeholder: "Enter something..." }
+                })
+              ],
+              1
             )
-          ],
-          1
+          ]
         )
       ]),
       _vm._v(" "),
@@ -70402,15 +70561,7 @@ var render = function() {
                       ? _c("tr", { key: index }, [
                           _c("td", [_vm._v(_vm._s(tag.id))]),
                           _vm._v(" "),
-                          _c(
-                            "td",
-                            [
-                              _c("Tag", { attrs: { color: "cyan" } }, [
-                                _vm._v(_vm._s(tag.name))
-                              ])
-                            ],
-                            1
-                          ),
+                          _c("td", [_vm._v(_vm._s(tag.name))]),
                           _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(tag.created_at))]),
                           _vm._v(" "),
@@ -70419,13 +70570,34 @@ var render = function() {
                           _c(
                             "td",
                             [
-                              _c("Button", { attrs: { type: "primary" } }, [
-                                _vm._v("View")
-                              ]),
+                              _c(
+                                "Button",
+                                {
+                                  attrs: { type: "primary" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.showEditTag(tag, index)
+                                    }
+                                  }
+                                },
+                                [_vm._v("Edit")]
+                              ),
                               _vm._v(" "),
-                              _c("Button", { attrs: { type: "error" } }, [
-                                _vm._v("Delete")
-                              ])
+                              _c(
+                                "Button",
+                                {
+                                  attrs: { type: "error" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.showDeletingModal(
+                                        tag.id,
+                                        index
+                                      )
+                                    }
+                                  }
+                                },
+                                [_vm._v("Delete")]
+                              )
                             ],
                             1
                           )
@@ -70500,6 +70672,136 @@ var render = function() {
                   on: { click: _vm.addTag }
                 },
                 [_vm._v(_vm._s(_vm.isAdding ? "Adding.." : "Add Tag"))]
+              )
+            ],
+            1
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "Modal",
+        {
+          attrs: {
+            title: "Update Tag",
+            "mask-closable": false,
+            closable: false
+          },
+          model: {
+            value: _vm.editModal,
+            callback: function($$v) {
+              _vm.editModal = $$v
+            },
+            expression: "editModal"
+          }
+        },
+        [
+          _c(
+            "div",
+            [
+              _c("label", [_vm._v("Tag Name")]),
+              _vm._v(" "),
+              _c("Input", {
+                attrs: { placeholder: "Enter something..." },
+                model: {
+                  value: _vm.editData.name,
+                  callback: function($$v) {
+                    _vm.$set(_vm.editData, "name", $$v)
+                  },
+                  expression: "editData.name"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { attrs: { slot: "footer" }, slot: "footer" },
+            [
+              _c(
+                "Button",
+                {
+                  attrs: { type: "default" },
+                  on: {
+                    click: function($event) {
+                      _vm.editModal = false
+                    }
+                  }
+                },
+                [_vm._v("Cancel")]
+              ),
+              _vm._v(" "),
+              _c(
+                "Button",
+                {
+                  attrs: {
+                    type: "primary",
+                    disable: _vm.isAdding,
+                    loading: _vm.isAdding
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.updateTag(_vm.editData)
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(_vm.isAdding ? "Updating.." : "Update Tag"))]
+              )
+            ],
+            1
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "Modal",
+        {
+          attrs: { width: "360" },
+          model: {
+            value: _vm.showModalDelete,
+            callback: function($$v) {
+              _vm.showModalDelete = $$v
+            },
+            expression: "showModalDelete"
+          }
+        },
+        [
+          _c(
+            "p",
+            {
+              staticStyle: { color: "#f60", "text-align": "center" },
+              attrs: { slot: "header" },
+              slot: "header"
+            },
+            [
+              _c("icon", { attrs: { type: "ios-information-circle" } }),
+              _vm._v(" "),
+              _c("span", [_vm._v("Delete confirmation")])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("div", { staticStyle: { "text-align": "center" } }, [
+            _c("p", [_vm._v("Are you want to delete this tag ?")])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { attrs: { slot: "footer" }, slot: "footer" },
+            [
+              _c(
+                "Button",
+                {
+                  attrs: {
+                    type: "error",
+                    size: "large",
+                    long: "",
+                    isloading: _vm.isDeleting
+                  },
+                  on: { click: _vm.deleteTag }
+                },
+                [_vm._v(_vm._s(_vm.isDeleting ? "Deleting.." : "Delete"))]
               )
             ],
             1
