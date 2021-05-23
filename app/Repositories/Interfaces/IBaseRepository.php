@@ -50,7 +50,7 @@ interface IBaseRepository
 
     /**
      * Delete by id
-     * @param Model $model
+     * @param $id
      * @return mixed
      */
     public function delete($id);
