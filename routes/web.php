@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 Route::get('/app/get_tags', 'App\Http\Controllers\Admin\TagController@index');
 Route::post('/app/create_tag', 'App\Http\Controllers\Admin\TagController@store');
+Route::post('/app/update_tag/{tag}', 'App\Http\Controllers\Admin\TagController@update');
 
 
 Route::get('/new', 'App\Http\Controllers\TestController@index');
