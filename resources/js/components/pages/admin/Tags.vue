@@ -3,7 +3,7 @@
         <div class="card-header">
             <h6 class="m-0 font-weight-bold text-primary" style="text-align: center">Manager Tags</h6>
             <div style="display: flex; flex-direction: row-reverse; margin-top: 5px">
-                <div><Button type="success" @click="addModal=true">Add Tag</Button></div>
+                <div><Button type="success" @click="addModal=true">Add New</Button></div>
                 <div><Input search placeholder="Enter something..." style="width: 300px; margin-right: 10px;"/></div>
             </div>
         </div>
@@ -120,13 +120,13 @@ export default {
     methods: {
 
         async getTags() {
-            const response = await this.callApi('get', '/app/get_tags');
+            const response = await this.callApi('get', 'api/admin/app/get_tags');
             return response.data;
         },
 
         async addTag() {
             if (this.data.name.trim() == '') return this.error('The tag name field is required.');
-                await this.callApi('post', '/app/create_tag', this.data).then((response) => {
+                await this.callApi('post', 'api/admin/app/create_tag', this.data).then((response) => {
                     this.success('Tag has been added successfully!');
                     this.tags.unshift(response.data);
                     this.addModal = false;
@@ -139,7 +139,7 @@ export default {
         async updateTag(editData) {
             if (this.editData.name.trim() == '') return this.error('The tag name field is required.');
 
-                await this.callApi('post', `/app/update_tag/${editData.id}`, this.editData).then((response) => {
+                await this.callApi('post', `api/admin/app/update_tag/${editData.id}`, this.editData).then((response) => {
                     this.tags[this.index].name = this.editData.name;
                     this.success('Tag has been update successfully!');
                     this.editModal = false;

@@ -1905,6 +1905,377 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/admin/Categories.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/admin/Categories.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      data: {
+        name: "",
+        image: ""
+      },
+      editData: {
+        id: "",
+        name: ""
+      },
+      tags: {},
+      deleteItem: {},
+      addModal: false,
+      editModal: false,
+      isAdding: false,
+      isDeleting: false,
+      showModalDelete: false,
+      index: -1
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _this.getTags();
+
+            case 2:
+              _this.tags = _context.sent;
+
+            case 3:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  },
+  methods: {
+    getTags: function getTags() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return _this2.callApi('get', 'api/admin/app/get_tags');
+
+              case 2:
+                response = _context2.sent;
+                return _context2.abrupt("return", response.data);
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    addTag: function addTag() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                if (!(_this3.data.name.trim() == '')) {
+                  _context3.next = 2;
+                  break;
+                }
+
+                return _context3.abrupt("return", _this3.error('The tag name field is required.'));
+
+              case 2:
+                _context3.next = 4;
+                return _this3.callApi('post', 'api/admin/app/create_tag', _this3.data).then(function (response) {
+                  _this3.success('Tag has been added successfully!');
+
+                  _this3.tags.unshift(response.data);
+
+                  _this3.addModal = false;
+                  _this3.data.name = "";
+                })["catch"](function (e) {
+                  _this3.error();
+                });
+
+              case 4:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    updateTag: function updateTag(editData) {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                if (!(_this4.editData.name.trim() == '')) {
+                  _context4.next = 2;
+                  break;
+                }
+
+                return _context4.abrupt("return", _this4.error('The tag name field is required.'));
+
+              case 2:
+                _context4.next = 4;
+                return _this4.callApi('post', "api/admin/app/update_tag/".concat(editData.id), _this4.editData).then(function (response) {
+                  _this4.tags[_this4.index].name = _this4.editData.name;
+
+                  _this4.success('Tag has been update successfully!');
+
+                  _this4.editModal = false;
+                })["catch"](function (e) {
+                  _this4.error();
+                });
+
+              case 4:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }))();
+    },
+    deleteTag: function deleteTag() {
+      var _this5 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.next = 2;
+                return _this5.callApi('post', "api/admin/app/delete_tag/".concat(_this5.deleteItem)).then(function (res) {
+                  _this5.success('Tag has been delete successfully!');
+
+                  _this5.tags.splice(_this5.index, 1);
+
+                  _this5.showModalDelete = false;
+                })["catch"](function (e) {
+                  _this5.error();
+                });
+
+              case 2:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5);
+      }))();
+    },
+    showEditTag: function showEditTag(tag, index) {
+      var obj = {
+        id: tag.id,
+        name: tag.name
+      };
+      this.editData = obj;
+      this.editModal = true;
+      this.index = index;
+    },
+    showDeletingModal: function showDeletingModal(tag, idx) {
+      this.showModalDelete = true;
+      this.deleteItem = tag;
+      this.index = idx;
+    },
+    handleSuccess: function handleSuccess(res, file) {
+      this.data.image = res;
+    },
+    handleError: function handleError(res, file) {
+      this.$Notice.warning({
+        title: 'The file format is incorrect',
+        desc: "".concat(file.errors.file.length ? file.errors.file[0] : 'Something went wrong!')
+      });
+    },
+    handleFormatError: function handleFormatError(file) {
+      this.$Notice.warning({
+        title: 'The file format is incorrect',
+        desc: 'File format of ' + file.name + ' is incorrect, please select jpg or png.'
+      });
+    },
+    handleMaxSize: function handleMaxSize(file) {
+      this.$Notice.warning({
+        title: 'Exceeding file size limit',
+        desc: 'File  ' + file.name + ' is too large, no more than 2M.'
+      });
+    },
+    deleteImage: function deleteImage() {
+      var _this6 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+        var image, res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                image = _this6.data.image;
+                _this6.data.image = '';
+
+                _this6.$refs.uploads.clearFiles();
+
+                _context6.next = 5;
+                return _this6.callApi('post', 'api/admin/app/delete_image', {
+                  image: image
+                });
+
+              case 5:
+                res = _context6.sent;
+
+                if (res.status !== 200) {
+                  _this6.data.image = image;
+
+                  _this6.swr();
+                }
+
+              case 7:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6);
+      }))();
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/admin/Tags.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/admin/Tags.vue?vue&type=script&lang=js& ***!
@@ -2069,7 +2440,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return _this2.callApi('get', '/app/get_tags');
+                return _this2.callApi('get', 'api/admin/app/get_tags');
 
               case 2:
                 response = _context2.sent;
@@ -2100,7 +2471,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 _context3.next = 4;
-                return _this3.callApi('post', '/app/create_tag', _this3.data).then(function (response) {
+                return _this3.callApi('post', 'api/admin/app/create_tag', _this3.data).then(function (response) {
                   _this3.success('Tag has been added successfully!');
 
                   _this3.tags.unshift(response.data);
@@ -2136,7 +2507,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 _context4.next = 4;
-                return _this4.callApi('post', "/app/update_tag/".concat(editData.id), _this4.editData).then(function (response) {
+                return _this4.callApi('post', "api/admin/app/update_tag/".concat(editData.id), _this4.editData).then(function (response) {
                   _this4.tags[_this4.index].name = _this4.editData.name;
 
                   _this4.success('Tag has been update successfully!');
@@ -6786,6 +7157,30 @@ var routes = [//home page
 
 })));
 //# sourceMappingURL=bootstrap.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/admin/Categories.vue?vue&type=style&index=0&id=02672c72&lang=scss&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/admin/Categories.vue?vue&type=style&index=0&id=02672c72&lang=scss&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "label[data-v-02672c72] {\n  font-weight: bold;\n}\n.button-right[data-v-02672c72] {\n  float: right;\n}\n.demo-upload-list[data-v-02672c72] {\n  display: inline-block;\n  width: 60px;\n  height: 60px;\n  text-align: center;\n  line-height: 60px;\n  border: 1px solid transparent;\n  border-radius: 4px;\n  overflow: hidden;\n  background: #fff;\n  position: relative;\n  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);\n  margin-right: 4px;\n}\n.demo-upload-list img[data-v-02672c72] {\n  width: 100%;\n  height: 100%;\n}\n.demo-upload-list-cover[data-v-02672c72] {\n  display: none;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background: rgba(0, 0, 0, 0.6);\n}\n.demo-upload-list:hover .demo-upload-list-cover[data-v-02672c72] {\n  display: block;\n}\n.demo-upload-list-cover i[data-v-02672c72] {\n  color: #fff;\n  font-size: 20px;\n  cursor: pointer;\n  margin: 0 2px;\n}", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
 
 /***/ }),
@@ -21542,6 +21937,36 @@ try {
   Function("r", "regeneratorRuntime = r")(runtime);
 }
 
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/admin/Categories.vue?vue&type=style&index=0&id=02672c72&lang=scss&scoped=true&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/admin/Categories.vue?vue&type=style&index=0&id=02672c72&lang=scss&scoped=true& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Categories_vue_vue_type_style_index_0_id_02672c72_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!../../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Categories.vue?vue&type=style&index=0&id=02672c72&lang=scss&scoped=true& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/admin/Categories.vue?vue&type=style&index=0&id=02672c72&lang=scss&scoped=true&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Categories_vue_vue_type_style_index_0_id_02672c72_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Categories_vue_vue_type_style_index_0_id_02672c72_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
@@ -67857,21 +68282,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Categories_vue_vue_type_template_id_02672c72___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Categories.vue?vue&type=template&id=02672c72& */ "./resources/js/components/pages/admin/Categories.vue?vue&type=template&id=02672c72&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _Categories_vue_vue_type_template_id_02672c72_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Categories.vue?vue&type=template&id=02672c72&scoped=true& */ "./resources/js/components/pages/admin/Categories.vue?vue&type=template&id=02672c72&scoped=true&");
+/* harmony import */ var _Categories_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Categories.vue?vue&type=script&lang=js& */ "./resources/js/components/pages/admin/Categories.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Categories_vue_vue_type_style_index_0_id_02672c72_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Categories.vue?vue&type=style&index=0&id=02672c72&lang=scss&scoped=true& */ "./resources/js/components/pages/admin/Categories.vue?vue&type=style&index=0&id=02672c72&lang=scss&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__.default)(
-  script,
-  _Categories_vue_vue_type_template_id_02672c72___WEBPACK_IMPORTED_MODULE_0__.render,
-  _Categories_vue_vue_type_template_id_02672c72___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
+  _Categories_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _Categories_vue_vue_type_template_id_02672c72_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Categories_vue_vue_type_template_id_02672c72_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  null,
+  "02672c72",
   null
   
 )
@@ -68051,6 +68480,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/pages/admin/Categories.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/pages/admin/Categories.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Categories_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Categories.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/admin/Categories.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Categories_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/pages/admin/Tags.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************!*\
   !*** ./resources/js/components/pages/admin/Tags.vue?vue&type=script&lang=js& ***!
@@ -68064,6 +68509,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Tags_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Tags.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/admin/Tags.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Tags_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/admin/Categories.vue?vue&type=style&index=0&id=02672c72&lang=scss&scoped=true&":
+/*!**********************************************************************************************************************!*\
+  !*** ./resources/js/components/pages/admin/Categories.vue?vue&type=style&index=0&id=02672c72&lang=scss&scoped=true& ***!
+  \**********************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Categories_vue_vue_type_style_index_0_id_02672c72_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!../../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Categories.vue?vue&type=style&index=0&id=02672c72&lang=scss&scoped=true& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/admin/Categories.vue?vue&type=style&index=0&id=02672c72&lang=scss&scoped=true&");
+
 
 /***/ }),
 
@@ -68131,19 +68589,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/pages/admin/Categories.vue?vue&type=template&id=02672c72&":
-/*!*******************************************************************************************!*\
-  !*** ./resources/js/components/pages/admin/Categories.vue?vue&type=template&id=02672c72& ***!
-  \*******************************************************************************************/
+/***/ "./resources/js/components/pages/admin/Categories.vue?vue&type=template&id=02672c72&scoped=true&":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/js/components/pages/admin/Categories.vue?vue&type=template&id=02672c72&scoped=true& ***!
+  \*******************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Categories_vue_vue_type_template_id_02672c72___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Categories_vue_vue_type_template_id_02672c72___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Categories_vue_vue_type_template_id_02672c72_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Categories_vue_vue_type_template_id_02672c72_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Categories_vue_vue_type_template_id_02672c72___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Categories.vue?vue&type=template&id=02672c72& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/admin/Categories.vue?vue&type=template&id=02672c72&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Categories_vue_vue_type_template_id_02672c72_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Categories.vue?vue&type=template&id=02672c72&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/admin/Categories.vue?vue&type=template&id=02672c72&scoped=true&");
 
 
 /***/ }),
@@ -68536,10 +68994,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/admin/Categories.vue?vue&type=template&id=02672c72&":
-/*!**********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/admin/Categories.vue?vue&type=template&id=02672c72& ***!
-  \**********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/admin/Categories.vue?vue&type=template&id=02672c72&scoped=true&":
+/*!**********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/admin/Categories.vue?vue&type=template&id=02672c72&scoped=true& ***!
+  \**********************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -68552,35 +69010,64 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container-fluid" }, [
-      _c("h1", { staticClass: "h3 mb-2 text-gray-800" }, [_vm._v("Tables")]),
-      _vm._v(" "),
-      _c("p", { staticClass: "mb-4" }, [
-        _vm._v(
-          "DataTables is a third party plugin that is used to generate the demo table below.\n        For more information about DataTables, please visit the "
-        ),
+  return _c(
+    "div",
+    { staticClass: "card shadow mb-4" },
+    [
+      _c("div", { staticClass: "card-header" }, [
         _c(
-          "a",
-          { attrs: { target: "_blank", href: "https://datatables.net" } },
-          [_vm._v("official DataTables documentation")]
+          "h6",
+          {
+            staticClass: "m-0 font-weight-bold text-primary",
+            staticStyle: { "text-align": "center" }
+          },
+          [_vm._v("Manager Category")]
         ),
-        _vm._v(".")
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticStyle: {
+              display: "flex",
+              "flex-direction": "row-reverse",
+              "margin-top": "5px"
+            }
+          },
+          [
+            _c(
+              "div",
+              [
+                _c(
+                  "Button",
+                  {
+                    attrs: { type: "success" },
+                    on: {
+                      click: function($event) {
+                        _vm.addModal = true
+                      }
+                    }
+                  },
+                  [_vm._v("Add New")]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              [
+                _c("Input", {
+                  staticStyle: { width: "300px", "margin-right": "10px" },
+                  attrs: { search: "", placeholder: "Enter something..." }
+                })
+              ],
+              1
+            )
+          ]
+        )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card shadow mb-4" }, [
-        _c("div", { staticClass: "card-header py-3" }, [
-          _c("h6", { staticClass: "m-0 font-weight-bold text-primary" }, [
-            _vm._v("DataTables Example")
-          ])
-        ]),
-        _vm._v(" "),
+      _c("div", { staticClass: "container-fluid" }, [
         _c("div", { staticClass: "card-body" }, [
           _c("div", { staticClass: "table-responsive" }, [
             _c(
@@ -68590,841 +69077,303 @@ var staticRenderFns = [
                 attrs: { id: "dataTable", width: "100%", cellspacing: "0" }
               },
               [
-                _c("thead", [
-                  _c("tr", [
-                    _c("th", [_vm._v("Name")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Position")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Office")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Age")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Start date")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Salary")])
-                  ])
-                ]),
+                _vm._m(0),
                 _vm._v(" "),
-                _c("tfoot", [
-                  _c("tr", [
-                    _c("th", [_vm._v("Name")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Position")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Office")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Age")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Start date")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Salary")])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("tbody", [
-                  _c("tr", [
-                    _c("td", [_vm._v("Tiger Nixon")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("System Architect")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Edinburgh")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("61")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2011/04/25")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$320,800")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Garrett Winters")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Accountant")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Tokyo")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("63")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2011/07/25")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$170,750")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Ashton Cox")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Junior Technical Author")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("San Francisco")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("66")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2009/01/12")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$86,000")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Cedric Kelly")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Senior Javascript Developer")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Edinburgh")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("22")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2012/03/29")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$433,060")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Airi Satou")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Accountant")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Tokyo")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("33")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2008/11/28")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$162,700")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Brielle Williamson")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Integration Specialist")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("New York")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("61")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2012/12/02")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$372,000")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Herrod Chandler")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Sales Assistant")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("San Francisco")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("59")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2012/08/06")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$137,500")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Rhona Davidson")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Integration Specialist")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Tokyo")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("55")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2010/10/14")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$327,900")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Colleen Hurst")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Javascript Developer")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("San Francisco")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("39")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2009/09/15")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$205,500")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Sonya Frost")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Software Engineer")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Edinburgh")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("23")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2008/12/13")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$103,600")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Jena Gaines")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Office Manager")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("London")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("30")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2008/12/19")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$90,560")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Quinn Flynn")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Support Lead")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Edinburgh")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("22")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2013/03/03")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$342,000")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Charde Marshall")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Regional Director")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("San Francisco")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("36")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2008/10/16")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$470,600")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Haley Kennedy")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Senior Marketing Designer")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("London")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("43")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2012/12/18")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$313,500")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Tatyana Fitzpatrick")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Regional Director")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("London")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("19")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2010/03/17")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$385,750")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Michael Silva")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Marketing Designer")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("London")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("66")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2012/11/27")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$198,500")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Paul Byrd")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Chief Financial Officer (CFO)")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("New York")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("64")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2010/06/09")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$725,000")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Gloria Little")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Systems Administrator")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("New York")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("59")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2009/04/10")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$237,500")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Bradley Greer")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Software Engineer")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("London")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("41")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2012/10/13")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$132,000")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Dai Rios")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Personnel Lead")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Edinburgh")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("35")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2012/09/26")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$217,500")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Jenette Caldwell")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Development Lead")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("New York")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("30")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2011/09/03")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$345,000")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Yuri Berry")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Chief Marketing Officer (CMO)")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("New York")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("40")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2009/06/25")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$675,000")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Caesar Vance")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Pre-Sales Support")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("New York")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("21")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2011/12/12")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$106,450")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Doris Wilder")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Sales Assistant")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Sidney")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("23")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2010/09/20")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$85,600")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Angelica Ramos")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Chief Executive Officer (CEO)")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("London")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("47")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2009/10/09")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$1,200,000")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Gavin Joyce")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Developer")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Edinburgh")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("42")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2010/12/22")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$92,575")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Jennifer Chang")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Regional Director")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Singapore")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("28")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2010/11/14")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$357,650")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Brenden Wagner")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Software Engineer")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("San Francisco")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("28")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2011/06/07")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$206,850")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Fiona Green")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Chief Operating Officer (COO)")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("San Francisco")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("48")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2010/03/11")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$850,000")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Shou Itou")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Regional Marketing")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Tokyo")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("20")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2011/08/14")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$163,000")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Michelle House")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Integration Specialist")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Sidney")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("37")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2011/06/02")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$95,400")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Suki Burks")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Developer")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("London")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("53")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2009/10/22")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$114,500")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Prescott Bartlett")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Technical Author")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("London")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("27")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2011/05/07")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$145,000")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Gavin Cortez")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Team Leader")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("San Francisco")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("22")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2008/10/26")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$235,500")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Martena Mccray")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Post-Sales support")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Edinburgh")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("46")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2011/03/09")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$324,050")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Unity Butler")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Marketing Designer")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("San Francisco")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("47")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2009/12/09")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$85,675")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Howard Hatfield")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Office Manager")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("San Francisco")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("51")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2008/12/16")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$164,500")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Hope Fuentes")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Secretary")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("San Francisco")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("41")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2010/02/12")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$109,850")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Vivian Harrell")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Financial Controller")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("San Francisco")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("62")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2009/02/14")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$452,500")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Timothy Mooney")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Office Manager")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("London")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("37")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2008/12/11")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$136,200")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Jackson Bradshaw")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Director")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("New York")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("65")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2008/09/26")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$645,750")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Olivia Liang")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Support Engineer")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Singapore")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("64")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2011/02/03")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$234,500")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Bruno Nash")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Software Engineer")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("London")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("38")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2011/05/03")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$163,500")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Sakura Yamamoto")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Support Engineer")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Tokyo")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("37")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2009/08/19")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$139,575")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Thor Walton")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Developer")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("New York")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("61")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2013/08/11")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$98,540")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Finn Camacho")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Support Engineer")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("San Francisco")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("47")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2009/07/07")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$87,500")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Serge Baldwin")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Data Coordinator")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Singapore")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("64")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2012/04/09")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$138,575")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Zenaida Frank")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Software Engineer")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("New York")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("63")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2010/01/04")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$125,250")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Zorita Serrano")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Software Engineer")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("San Francisco")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("56")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2012/06/01")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$115,000")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Jennifer Acosta")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Junior Javascript Developer")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Edinburgh")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("43")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2013/02/01")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$75,650")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Cara Stevens")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Sales Assistant")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("New York")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("46")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2011/12/06")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$145,600")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Hermione Butler")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Regional Director")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("London")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("47")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2011/03/21")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$356,250")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Lael Greer")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Systems Administrator")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("London")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("21")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2009/02/27")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$103,500")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Jonas Alexander")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Developer")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("San Francisco")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("30")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2010/07/14")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$86,500")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Shad Decker")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Regional Director")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Edinburgh")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("51")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2008/11/13")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$183,000")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Michael Bruce")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Javascript Developer")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Singapore")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("29")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2011/06/27")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$183,000")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Donna Snider")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Customer Support")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("New York")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("27")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("2011/01/25")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("$112,000")])
-                  ])
-                ])
+                _c(
+                  "tbody",
+                  _vm._l(_vm.tags, function(tag, index) {
+                    return _vm.tags.length
+                      ? _c("tr", { key: index }, [
+                          _c("td", [_vm._v(_vm._s(tag.id))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(tag.name))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(tag.created_at))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(tag.updated_at))]),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            [
+                              _c(
+                                "Button",
+                                {
+                                  attrs: { type: "primary" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.showEditTag(tag, index)
+                                    }
+                                  }
+                                },
+                                [_vm._v("Edit")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "Button",
+                                {
+                                  attrs: { type: "error" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.showDeletingModal(
+                                        tag.id,
+                                        index
+                                      )
+                                    }
+                                  }
+                                },
+                                [_vm._v("Delete")]
+                              )
+                            ],
+                            1
+                          )
+                        ])
+                      : _vm._e()
+                  }),
+                  0
+                )
               ]
             )
           ])
         ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "Modal",
+        {
+          attrs: {
+            title: "Add Category",
+            "mask-closable": false,
+            closable: false
+          },
+          model: {
+            value: _vm.addModal,
+            callback: function($$v) {
+              _vm.addModal = $$v
+            },
+            expression: "addModal"
+          }
+        },
+        [
+          _c("label", [_vm._v("Name")]),
+          _vm._v(" "),
+          _c("Input", {
+            attrs: { placeholder: "Enter something..." },
+            model: {
+              value: _vm.editData.name,
+              callback: function($$v) {
+                _vm.$set(_vm.editData, "name", $$v)
+              },
+              expression: "editData.name"
+            }
+          }),
+          _vm._v(" "),
+          _c("label", [_vm._v("Image")]),
+          _vm._v(" "),
+          _c(
+            "Upload",
+            {
+              ref: "uploads",
+              attrs: {
+                headers: { "X-Requested-With": "XMLHttpRequest" },
+                action: "api/admin/app/upload",
+                type: "drag",
+                format: ["jpg", "jpeg", "png"],
+                "on-success": _vm.handleSuccess,
+                "on-error": _vm.handleError,
+                "on-format-error": _vm.handleFormatError,
+                "on-exceeded-size": _vm.handleMaxSize,
+                "max-size": 2048
+              }
+            },
+            [
+              _c(
+                "div",
+                { staticStyle: { padding: "20px 0" } },
+                [
+                  _c("Icon", {
+                    staticStyle: { color: "#3399ff" },
+                    attrs: { type: "ios-cloud-upload", size: "52" }
+                  }),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Click or drag files here to upload")])
+                ],
+                1
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _vm.data.image
+            ? _c("div", { staticClass: "demo-upload-list" }, [
+                _c("img", {
+                  attrs: { src: "/uploads/images/" + _vm.data.image }
+                }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "demo-upload-list-cover" },
+                  [
+                    _c("Icon", {
+                      attrs: { type: "ios-trash-outline" },
+                      on: { click: _vm.deleteImage }
+                    })
+                  ],
+                  1
+                )
+              ])
+            : _vm._e()
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "Modal",
+        {
+          attrs: {
+            title: "Update Tag",
+            "mask-closable": false,
+            closable: false
+          },
+          model: {
+            value: _vm.editModal,
+            callback: function($$v) {
+              _vm.editModal = $$v
+            },
+            expression: "editModal"
+          }
+        },
+        [
+          _c(
+            "div",
+            [
+              _c("label", [_vm._v("Tag Name")]),
+              _vm._v(" "),
+              _c("Input", {
+                attrs: { placeholder: "Enter something..." },
+                model: {
+                  value: _vm.editData.name,
+                  callback: function($$v) {
+                    _vm.$set(_vm.editData, "name", $$v)
+                  },
+                  expression: "editData.name"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { attrs: { slot: "footer" }, slot: "footer" },
+            [
+              _c(
+                "Button",
+                {
+                  attrs: { type: "default" },
+                  on: {
+                    click: function($event) {
+                      _vm.editModal = false
+                    }
+                  }
+                },
+                [_vm._v("Cancel")]
+              ),
+              _vm._v(" "),
+              _c(
+                "Button",
+                {
+                  attrs: {
+                    type: "primary",
+                    disable: _vm.isAdding,
+                    loading: _vm.isAdding
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.updateTag(_vm.editData)
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(_vm.isAdding ? "Updating.." : "Update Tag"))]
+              )
+            ],
+            1
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "Modal",
+        {
+          attrs: { width: "360" },
+          model: {
+            value: _vm.showModalDelete,
+            callback: function($$v) {
+              _vm.showModalDelete = $$v
+            },
+            expression: "showModalDelete"
+          }
+        },
+        [
+          _c(
+            "p",
+            {
+              staticStyle: { color: "#f60", "text-align": "center" },
+              attrs: { slot: "header" },
+              slot: "header"
+            },
+            [
+              _c("icon", { attrs: { type: "ios-information-circle" } }),
+              _vm._v(" "),
+              _c("span", [_vm._v("Delete confirmation")])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("div", { staticStyle: { "text-align": "center" } }, [
+            _c("p", [_vm._v("Are you want to delete this tag ?")])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { attrs: { slot: "footer" }, slot: "footer" },
+            [
+              _c(
+                "Button",
+                {
+                  attrs: {
+                    type: "error",
+                    size: "large",
+                    long: "",
+                    isloading: _vm.isDeleting
+                  },
+                  on: { click: _vm.deleteTag }
+                },
+                [_vm._v(_vm._s(_vm.isDeleting ? "Deleting.." : "Delete"))]
+              )
+            ],
+            1
+          )
+        ]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "row" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "150px" } }, [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Create_At")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Updated_At")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "250px" } }, [_vm._v("Action")])
       ])
     ])
   }
@@ -70522,7 +70471,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("Add Tag")]
+                  [_vm._v("Add New")]
                 )
               ],
               1
