@@ -26,5 +26,6 @@ Homestead.json
 /public/storage
 /storage/*.key
 /vendor
+/public
 .env.backup
 docker-compose.override.yml
