@@ -25,6 +25,10 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/app/delete_tag/{tag}', 'App\Http\Controllers\Admin\TagController@delete');
 
     // category
+    Route::get('/app/get_categories', 'App\Http\Controllers\Admin\CategoryController@index');
+    Route::post('/app/create_categories', 'App\Http\Controllers\Admin\CategoryController@store');
+    Route::post('/app/update_category/{category}', 'App\Http\Controllers\Admin\CategoryController@update');
+    Route::post('/app/delete_category/{category}', 'App\Http\Controllers\Admin\CategoryController@delete');
     Route::post('app/upload', 'App\Http\Controllers\Admin\CategoryController@upload');
     Route::post('app/delete_image', 'App\Http\Controllers\Admin\CategoryController@deleteImage');
 });
