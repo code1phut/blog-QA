@@ -40,9 +40,9 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN composer global require "squizlabs/php_codesniffer=*"
 
 # install nodejs
-# Install Node.js
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash
+RUN apt-get update
 RUN apt-get install --yes nodejs
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash
 RUN node -v
 RUN npm -v
 RUN npm i -g nodemon

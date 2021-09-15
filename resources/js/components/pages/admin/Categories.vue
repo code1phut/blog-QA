@@ -118,27 +118,13 @@
             </div>
         </Modal>
         <!--  End Modal Update  -->
-        <!-- Modal Delete  -->
-        <Modal
-            v-model="showModalDelete"
-            width="360"
-        >
-            <p slot="header" style="color:#f60;text-align:center">
-                <icon type="ios-information-circle"></icon>
-                <span>Delete confirmation</span>
-            </p>
-            <div style="text-align:center">
-                <p>Are you want to delete this category ?</p>
-            </div>
-            <div slot="footer">
-                <Button type="error" size="large" long @click="deleteCategory" :isloading="isDeleting">{{ isDeleting ? "Deleting.." : "Delete" }}</Button>
-            </div>
-        </Modal>
-        <!-- End Modal Delete  -->
+        <DeleteModal></DeleteModal>
     </div>
 </template>
 <script>
 import Vue from "vue";
+import DeleteModal from './components/DeleteModal.vue';
+import {mapGetters} from "vuex";
 
 export default {
     data () {
@@ -165,6 +151,22 @@ export default {
 
     async created() {
         this.categories = await this.getCategories();
+    },
+
+    components: {
+        DeleteModal
+    },
+
+    computed: {
+        ...mapGetters(['getDeleteModalBased'])
+    },
+
+    watch: {
+        getDeleteModalBased(data) {
+            if (data.isDeleted) {
+                this.categories.splice(data.deletingIndex, 1);
+            }
+        }
     },
 
     methods: {
@@ -202,16 +204,6 @@ export default {
             });
         },
 
-        async deleteCategory() {
-            await this.callApi('post', `api/admin/app/delete_category/${this.deleteItem}`).then((res) => {
-                this.success('Category has been delete successfully!');
-                this.categories.splice(this.index, 1);
-                this.showModalDelete = false;
-            }).catch((e) => {
-                this.error();
-            });
-        },
-
         showEditCategory(category, index) {
             let obj = {
                 id: category.id,
@@ -225,9 +217,13 @@ export default {
         },
 
         showDeletingModal(category, idx) {
-            this.showModalDelete = true
-            this.deleteItem = category;
-            this.index = idx;
+            const deleteModalBased = {
+                showModalDelete: true,
+                deleteUrl: `api/admin/app/delete_category/${category}`,
+                deletingIndex: idx,
+                isDeleted: false
+            };
+            this.$store.commit('setDeleteModal', deleteModalBased)
         },
         handleSuccess (res, file) {
             this.data.icon_image = res;
@@ -259,7 +255,7 @@ export default {
                 this.data.icon_image = image;
                 this.swr();
             }
-        }
+        },
     }
 }
 </script>
