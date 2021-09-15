@@ -109,7 +109,7 @@
                     </div>
                 </Upload>
                 <div class="demo-upload-list" v-if="editData.icon_image">
-                    <img :src="`/${editData.icon_image}`">
+                    <img :src="`${editData.icon_image}`">
                     <div class="demo-upload-list-cover">
                         <Icon type="ios-trash-outline" @click="deleteImage((false))"/>
                     </div>
