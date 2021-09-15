@@ -2,8 +2,8 @@
 <!-- Modal Delete  -->
     <Modal
         :value="this.getDeleteModalBased.showModalDelete"
-        :mask-closable="false"
-        :closable="false"
+        :mask-closable="true"
+        :closable="true"
         width="360"
     >
         <p slot="header" style="color:#f60;text-align:center">
@@ -46,9 +46,10 @@ export default {
             } else {
                 this.$store.commit('setShowDeleteModal', false)
                 this.error();
-
             }
+            this.isDeleting = false;
         },
+
     },
 }
 </script>

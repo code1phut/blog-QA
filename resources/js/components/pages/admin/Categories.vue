@@ -75,7 +75,7 @@
             </div>
             <div slot="footer">
                 <Button type="default" @click="addModal=false">Cancel</Button>
-                <Button type="primary" @click="addCategory" :disable="isAdding" :loading="isAdding">{{ isAdding ? "Adding.." : "Add Category" }}</Button>
+                <Button type="primary" @click="addCategory" :disabled="isAdding" :loading="isAdding">{{ isAdding ? "Adding.." : "Add Category" }}</Button>
             </div>
         </Modal>
         <!--  End Modal Create  -->
@@ -109,7 +109,7 @@
                     </div>
                 </Upload>
                 <div class="demo-upload-list" v-if="editData.icon_image">
-                    <img :src="`${editData.icon_image}`">
+                    <img :src="`/${editData.icon_image}`">
                     <div class="demo-upload-list-cover">
                         <Icon type="ios-trash-outline" @click="deleteImage((false))"/>
                     </div>
@@ -117,7 +117,7 @@
             </div>
             <div slot="footer">
                 <Button type="default" @click="closeEditModal">Cancel</Button>
-                <Button type="primary" @click="updateCategory(editData)" :disable="isAdding" :loading="isAdding">{{ isAdding ? "Updating.." : "Update Tag" }}</Button>
+                <Button type="primary" @click="updateCategory(editData)" :disabled="isAdding" :loading="isAdding">{{ isAdding ? "Updating.." : "Update Tag" }}</Button>
             </div>
         </Modal>
         <!--  End Modal Update  -->
@@ -184,6 +184,7 @@ export default {
         async addCategory() {
             if (this.data.name.trim() == '') return this.error('The name field is required.');
             if (this.data.icon_image.trim() == '') return this.error('The image field is required.');
+            this.data.icon_image = `/uploads/images/${this.data.icon_image}`
             await this.callApi('post', 'api/admin/app/create_categories', this.data).then((response) => {
                 this.success('Category has been added successfully!');
                 this.categories.unshift(response.data);
@@ -230,30 +231,35 @@ export default {
             };
             this.$store.commit('setDeleteModal', deleteModalBased)
         },
+
         handleSuccess (res, file) {
             if (this.isEditingItem) {
                 return this.editData.icon_image = `uploads/images/${res}`;
             }
             return this.data.icon_image = res;
         },
+
         handleError (res, file) {
             this.$Notice.warning({
                 title: 'The file format is incorrect',
                 desc: `${file.errors.file.length ? file.errors.file[0]: 'Something went wrong!'}`
             });
         },
+
         handleFormatError (file) {
             this.$Notice.warning({
                 title: 'The file format is incorrect',
                 desc: 'File format of ' + file.name + ' is incorrect, please select jpg or png.'
             });
         },
+
         handleMaxSize (file) {
             this.$Notice.warning({
                 title: 'Exceeding file size limit',
                 desc: 'File  ' + file.name + ' is too large, no more than 2M.'
             });
         },
+
         async deleteImage(isAdding = true) {
             let image;
 

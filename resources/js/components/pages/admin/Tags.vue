@@ -49,7 +49,7 @@
             </div>
             <div slot="footer">
                 <Button type="default" @click="addModal=false">Cancel</Button>
-                <Button type="primary" @click="addTag" :disable="isAdding" :loading="isAdding">{{ isAdding ? "Adding.." : "Add Tag" }}</Button>
+                <Button type="primary" @click="addTag" :disabled="isAdding" :loading="isAdding">{{ isAdding ? "Adding.." : "Add Tag" }}</Button>
             </div>
         </Modal>
         <!--  End Modal Create  -->
@@ -66,7 +66,7 @@
             </div>
             <div slot="footer">
                 <Button type="default" @click="editModal=false">Cancel</Button>
-                <Button type="primary" @click="updateTag(editData)" :disable="isAdding" :loading="isAdding">{{ isAdding ? "Updating.." : "Update Tag" }}</Button>
+                <Button type="primary" @click="updateTag(editData)" :disabled="isAdding" :loading="isAdding">{{ isAdding ? "Updating.." : "Update Tag" }}</Button>
             </div>
         </Modal>
         <!--  End Modal Update  -->
