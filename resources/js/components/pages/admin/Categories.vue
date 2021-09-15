@@ -75,7 +75,7 @@
             </div>
             <div slot="footer">
                 <Button type="default" @click="addModal=false">Cancel</Button>
-                <Button type="primary" @click="addCategory" :disable="isAdding" :loading="isAdding">{{ isAdding ? "Adding.." : "Add Category" }}</Button>
+                <Button type="primary" @click="addCategory" :disabled="isAdding" :loading="isAdding">{{ isAdding ? "Adding.." : "Add Category" }}</Button>
             </div>
         </Modal>
         <!--  End Modal Create  -->
@@ -117,31 +117,17 @@
             </div>
             <div slot="footer">
                 <Button type="default" @click="closeEditModal">Cancel</Button>
-                <Button type="primary" @click="updateCategory(editData)" :disable="isAdding" :loading="isAdding">{{ isAdding ? "Updating.." : "Update Tag" }}</Button>
+                <Button type="primary" @click="updateCategory(editData)" :disabled="isAdding" :loading="isAdding">{{ isAdding ? "Updating.." : "Update Tag" }}</Button>
             </div>
         </Modal>
         <!--  End Modal Update  -->
-        <!-- Modal Delete  -->
-        <Modal
-            v-model="showModalDelete"
-            width="360"
-        >
-            <p slot="header" style="color:#f60;text-align:center">
-                <icon type="ios-information-circle"></icon>
-                <span>Delete confirmation</span>
-            </p>
-            <div style="text-align:center">
-                <p>Are you want to delete this category ?</p>
-            </div>
-            <div slot="footer">
-                <Button type="error" size="large" long @click="deleteCategory" :isloading="isDeleting">{{ isDeleting ? "Deleting.." : "Delete" }}</Button>
-            </div>
-        </Modal>
-        <!-- End Modal Delete  -->
+        <DeleteModal></DeleteModal>
     </div>
 </template>
 <script>
 import Vue from "vue";
+import DeleteModal from './components/DeleteModal.vue';
+import {mapGetters} from "vuex";
 
 export default {
     data () {
@@ -172,6 +158,22 @@ export default {
         this.categories = await this.getCategories();
     },
 
+    components: {
+        DeleteModal
+    },
+
+    computed: {
+        ...mapGetters(['getDeleteModalBased'])
+    },
+
+    watch: {
+        getDeleteModalBased(data) {
+            if (data.isDeleted) {
+                this.categories.splice(data.deletingIndex, 1);
+            }
+        }
+    },
+
     methods: {
 
         async getCategories() {
@@ -182,6 +184,7 @@ export default {
         async addCategory() {
             if (this.data.name.trim() == '') return this.error('The name field is required.');
             if (this.data.icon_image.trim() == '') return this.error('The image field is required.');
+            this.data.icon_image = `/uploads/images/${this.data.icon_image}`
             await this.callApi('post', 'api/admin/app/create_categories', this.data).then((response) => {
                 this.success('Category has been added successfully!');
                 this.categories.unshift(response.data);
@@ -206,16 +209,6 @@ export default {
             });
         },
 
-        async deleteCategory() {
-            await this.callApi('post', `api/admin/app/delete_category/${this.deleteItem}`).then((res) => {
-                this.success('Category has been delete successfully!');
-                this.categories.splice(this.index, 1);
-                this.showModalDelete = false;
-            }).catch((e) => {
-                this.error();
-            });
-        },
-
         showEditCategory(category, index) {
             let obj = {
                 id: category.id,
@@ -230,34 +223,43 @@ export default {
         },
 
         showDeletingModal(category, idx) {
-            this.showModalDelete = true
-            this.deleteItem = category;
-            this.index = idx;
+            const deleteModalBased = {
+                showModalDelete: true,
+                deleteUrl: `api/admin/app/delete_category/${category}`,
+                deletingIndex: idx,
+                isDeleted: false
+            };
+            this.$store.commit('setDeleteModal', deleteModalBased)
         },
+
         handleSuccess (res, file) {
             if (this.isEditingItem) {
                 return this.editData.icon_image = `uploads/images/${res}`;
             }
             return this.data.icon_image = res;
         },
+
         handleError (res, file) {
             this.$Notice.warning({
                 title: 'The file format is incorrect',
                 desc: `${file.errors.file.length ? file.errors.file[0]: 'Something went wrong!'}`
             });
         },
+
         handleFormatError (file) {
             this.$Notice.warning({
                 title: 'The file format is incorrect',
                 desc: 'File format of ' + file.name + ' is incorrect, please select jpg or png.'
             });
         },
+
         handleMaxSize (file) {
             this.$Notice.warning({
                 title: 'Exceeding file size limit',
                 desc: 'File  ' + file.name + ' is too large, no more than 2M.'
             });
         },
+
         async deleteImage(isAdding = true) {
             let image;
 

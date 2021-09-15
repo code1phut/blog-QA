@@ -31,5 +31,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/app/delete_category/{category}', 'App\Http\Controllers\Admin\CategoryController@delete');
     Route::post('app/upload', 'App\Http\Controllers\Admin\CategoryController@upload');
     Route::post('app/delete_image', 'App\Http\Controllers\Admin\CategoryController@deleteImage');
+
+    // users
+    Route::get('/app/get_users', 'App\Http\Controllers\Admin\UserController@index');
+    Route::post('/app/create_user', 'App\Http\Controllers\Admin\UserController@store');
 });
 

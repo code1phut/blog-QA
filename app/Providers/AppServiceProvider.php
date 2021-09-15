@@ -9,6 +9,8 @@ class AppServiceProvider extends ServiceProvider
 {
     protected $repositories = [
         'ApiTagRepository',
+        'ApiCategoryRepository',
+        'ApiUserRepository',
     ];
     /**
      * Register any application services.
@@ -24,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
         foreach ($this->repositories as $repository) {
             $this->app->bindIf(
                 'App\\Repositories\\Interfaces\\I'.$repository,
-                'App\\Repositories\\Eloquents\\'.$repository
+                'App\\Repositories\\Eloquents\\'.$repository,
             );
         }
     }
