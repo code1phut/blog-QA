@@ -25,7 +25,9 @@
                         <tr v-for="(category, index) in categories" :key="index" v-if="categories.length">
                             <td>{{ category.id }}</td>
                             <td>{{ category.name }}</td>
-                            <td>{{ category.icon_image }}</td>
+                            <td class="table_image">
+                                <img style="width: 150px" :src="category.icon_image" />
+                            </td>
                             <td>{{ category.created_at }}</td>
                             <td>{{ category.updated_at }}</td>
                             <td>
@@ -66,7 +68,7 @@
                 </div>
             </Upload>
             <div class="demo-upload-list" v-if="data.icon_image">
-                <img :src="`/uploads/images/${data.icon_image}`">
+                <img :src="`${data.icon_image}`">
                 <div class="demo-upload-list-cover">
                     <Icon type="ios-trash-outline" @click="deleteImage"/>
                 </div>
@@ -89,7 +91,8 @@
                 <Input v-model="editData.name" placeholder="Enter something..." />
                 <label>Image</label>
                 <Upload
-                    ref="uploads"
+                    v-show="isIconImageNew"
+                    ref="editDataUploads"
                     :headers="{'X-Requested-With': 'XMLHttpRequest'}"
                     action="api/admin/app/upload"
                     type="drag"
@@ -105,15 +108,15 @@
                         <p>Click or drag files here to upload</p>
                     </div>
                 </Upload>
-                <div class="demo-upload-list" v-if="data.icon_image">
-                    <img :src="`/uploads/images/${data.icon_image}`">
+                <div class="demo-upload-list" v-if="editData.icon_image">
+                    <img :src="`${editData.icon_image}`">
                     <div class="demo-upload-list-cover">
-                        <Icon type="ios-trash-outline" @click="deleteImage"/>
+                        <Icon type="ios-trash-outline" @click="deleteImage((false))"/>
                     </div>
                 </div>
             </div>
             <div slot="footer">
-                <Button type="default" @click="editModal=false">Cancel</Button>
+                <Button type="default" @click="closeEditModal">Cancel</Button>
                 <Button type="primary" @click="updateCategory(editData)" :disable="isAdding" :loading="isAdding">{{ isAdding ? "Updating.." : "Update Tag" }}</Button>
             </div>
         </Modal>
@@ -146,6 +149,8 @@ export default {
             isDeleting: false,
             showModalDelete: false,
             index: -1,
+            isIconImageNew: false,
+            isEditingItem: false,
         }
     },
 
@@ -192,8 +197,7 @@ export default {
 
         async updateCategory(editData) {
             if (this.editData.name.trim() == '') return this.error('The name field is required.');
-            if (this.editData.icon_image.trim() == '') return this.error('The inage field is required.');
-
+            if (this.editData.icon_image.trim() == '') return this.error('The image field is required.');
             await this.callApi('post', `api/admin/app/update_category/${editData.id}`, this.editData).then((response) => {
                 this.categories[this.index].name = this.editData.name;
                 this.categories[this.index].icon_image = this.editData.icon_image;
@@ -214,6 +218,7 @@ export default {
             this.editData = obj;
             this.editModal = true;
             this.index = index
+            this.isEditingItem = true;
         },
 
         showDeletingModal(category, idx) {
@@ -226,7 +231,10 @@ export default {
             this.$store.commit('setDeleteModal', deleteModalBased)
         },
         handleSuccess (res, file) {
-            this.data.icon_image = res;
+            if (this.isEditingItem) {
+                return this.editData.icon_image = `uploads/images/${res}`;
+            }
+            return this.data.icon_image = res;
         },
         handleError (res, file) {
             this.$Notice.warning({
@@ -246,16 +254,30 @@ export default {
                 desc: 'File  ' + file.name + ' is too large, no more than 2M.'
             });
         },
-        async deleteImage() {
-            let image = this.data.icon_image;
-            this.data.icon_image = '';
-            this.$refs.uploads.clearFiles();
+        async deleteImage(isAdding = true) {
+            let image;
+
+            if (!isAdding) {
+                // for editing category
+                this.isIconImageNew = true
+                image = this.editData.icon_image;
+                this.editData.icon_image = '';
+                this.$refs.editDataUploads.clearFiles();
+            } else {
+                image = this.data.icon_image;
+                this.data.icon_image = '';
+                this.$refs.uploads.clearFiles();
+            }
             const res = await this.callApi('post', 'api/admin/app/delete_image', {image: image});
             if (res.status !== 200) {
                 this.data.icon_image = image;
                 this.swr();
             }
         },
+        closeEditModal() {
+            this.isEditingItem = false;
+            this.editModal = false;
+        }
     }
 }
 </script>
