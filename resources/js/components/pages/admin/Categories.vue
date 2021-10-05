@@ -280,6 +280,7 @@ export default {
                 this.swr();
             }
         },
+
         closeEditModal() {
             this.isEditingItem = false;
             this.editModal = false;

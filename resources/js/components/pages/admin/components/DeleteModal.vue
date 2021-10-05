@@ -35,13 +35,10 @@ export default {
 
     methods: {
         async deleteModal() {
-            // await this.callApi('post', `api/admin/app/delete_tag/${this.deleteItem}`).then((res) => {
-            console.log('url', this.getDeleteModalBased.deleteUrl)
-            console.log('data', this.getDeleteModalBased.data)
             this.isDeleting = true;
             const  res = await this.callApi('post', this.getDeleteModalBased.deleteUrl);
             if (res.status === 200) {
-                this.success('Category has been deleted successfully');
+                this.success('Delete successfully');
                 this.$store.commit('setShowDeleteModal', true)
             } else {
                 this.$store.commit('setShowDeleteModal', false)
