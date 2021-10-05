@@ -33,7 +33,7 @@
                             <td>{{ user.created_at }}</td>
                             <td>{{ user.updated_at }}</td>
                             <td>
-                                <Button type="primary" @click="showEditTag(user, index)">Edit</Button>
+                                <Button type="primary" @click="showEditUser(user, index)">Edit</Button>
                                 <Button type="error" @click="showDeletingModal(user.id, index)">Delete</Button>
                             </td>
                         </tr>
@@ -87,23 +87,43 @@
         </Modal>
         <!--  End Modal Create  -->
         <!--  Modal Update  -->
-<!--        <Modal-->
-<!--            v-model="editModal"-->
-<!--            title="Update Tag"-->
-<!--            :mask-closable="false"-->
-<!--            :closable="false"-->
-<!--        >-->
-<!--            <div>-->
-<!--                <label>Tag Name</label>-->
-<!--                <Input v-model="editData.name" placeholder="Enter something..." />-->
-<!--            </div>-->
-<!--            <div slot="footer">-->
-<!--                <Button type="default" @click="editModal=false">Cancel</Button>-->
-<!--                <Button type="primary" @click="updateTag(editData)" :disabled="isAdding" :loading="isAdding">{{ isAdding ? "Updating.." : "Update Tag" }}</Button>-->
-<!--            </div>-->
-<!--        </Modal>-->
+        <Modal
+            v-model="editModal"
+            title="Update User"
+            :mask-closable="false"
+            :closable="false"
+        >
+            <div>
+                <label>User Name</label>
+                <Input v-model="editData.user_name" placeholder="Enter something..." />
+            </div>
+            <div>
+                <label>Full Name</label>
+                <Input v-model="editData.full_name" placeholder="Enter something..." />
+            </div>
+            <div>
+                <label>Email</label>
+                <Input v-model="editData.email" placeholder="Enter something..." />
+            </div>
+            <div>
+                <label>Password</label>
+                <Input v-model="editData.password" placeholder="Enter something..." />
+            </div>
+            <div>
+                <label>Role</label>
+                <Select v-model="editData.role" placeholder="Choose something...">
+                    <Option value="Admin">Admin</Option>
+                    <Option value="User">User</Option>
+                </Select>
+            </div>
+            <div slot="footer">
+                <Button type="default" @click="editModal=false">Cancel</Button>
+                <Button type="primary" @click="updateUser(editData)" :disabled="isAdding" :loading="isAdding">{{ isAdding ? "Updating.." : "Update User" }}</Button>
+            </div>
+        </Modal>
         <!--  End Modal Update  -->
         <!-- Modal Delete  -->
+        <DeleteModal></DeleteModal>
 <!--        <Modal-->
 <!--            v-model="showModalDelete"-->
 <!--            width="360"-->
@@ -125,6 +145,8 @@
 <script>
 import Vue from "vue";
 import { roles } from "../../../enums/users";
+import DeleteModal from './components/DeleteModal.vue';
+import {mapGetters} from "vuex";
 
 export default {
     data () {
@@ -160,6 +182,22 @@ export default {
         this.users = await this.getUsers();
     },
 
+    components: {
+        DeleteModal
+    },
+
+    computed: {
+        ...mapGetters(['getDeleteModalBased'])
+    },
+
+    watch: {
+        getDeleteModalBased(data) {
+            if (data.isDeleted) {
+                this.users.splice(data.deletingIndex, 1);
+            }
+        }
+    },
+
     methods: {
 
         async getUsers() {
@@ -177,23 +215,37 @@ export default {
                 this.success('Tag has been added successfully!');
                 this.users.unshift(response.data);
                 this.addModal = false;
-                this.data.name = "";
+                this.data = {};
             }).catch((e) => {
                 this.error();
             });
         },
 
-        // async updateTag(editData) {
-        //     if (this.editData.name.trim() == '') return this.error('The tag name field is required.');
-        //
-        //     await this.callApi('post', `api/admin/app/update_tag/${editData.id}`, this.editData).then((response) => {
-        //         this.tags[this.index].name = this.editData.name;
-        //         this.success('Tag has been update successfully!');
-        //         this.editModal = false;
-        //     }).catch((e) => {
-        //         this.error();
-        //     });
-        // },
+        async updateUser(editData) {
+            if (this.editData.user_name.trim() == '') return this.error('The user name field is required.');
+            if (this.editData.full_name.trim() == '') return this.error('The full name field is required.');
+            if (this.editData.email.trim() == '') return this.error('The email field is required.');
+            if (this.editData.password.trim() == '') return this.error('The password field is required.');
+            if (this.editData.role.trim() == '') return this.error('The role field is required.');
+
+            await this.callApi('post', `api/admin/app/update_user/${editData.id}`, this.editData).then((response) => {
+                this.users[this.index] = this.editData;
+                this.success('User has been update successfully!');
+                this.editModal = false;
+            }).catch((e) => {
+                this.error();
+            });
+        },
+
+        showDeletingModal(user, idx) {
+            const deleteModalBased = {
+                showModalDelete: true,
+                deleteUrl: `api/admin/app/delete_user/${user}`,
+                deletingIndex: idx,
+                isDeleted: false
+            };
+            this.$store.commit('setDeleteModal', deleteModalBased)
+        },
 
         // async deleteTag() {
         //     await this.callApi('post', `api/admin/app/delete_tag/${this.deleteItem}`).then((res) => {
@@ -205,16 +257,20 @@ export default {
         //     });
         // },
 
-        // showEditTag(tag, index) {
-        //     let obj = {
-        //         id: tag.id,
-        //         name: tag.name
-        //     };
-        //
-        //     this.editData = obj;
-        //     this.editModal = true;
-        //     this.index = index
-        // },
+        showEditUser(user, index) {
+            let obj = {
+                id: user.id,
+                user_name: user.user_name,
+                full_name: user.full_name,
+                email: user.email,
+                password: user.password,
+                role: user.role,
+            };
+
+            this.editData = obj;
+            this.editModal = true;
+            this.index = index
+        },
 
         // showDeletingModal(tag, idx) {
         //     this.showModalDelete = true
